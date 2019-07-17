@@ -36,10 +36,8 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+    app.use(express.static('public'));
+    app.set('view engine', 'pug');
     app.use('/api', api);
-    app.get('/', (req, res) => {
-        res.json('Landing page')
-    });
-
     app.listen(SERVER_PORT, () => console.log(`Server listen to :${SERVER_PORT}`))
 }
