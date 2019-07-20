@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>锁币合约列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<style type="text/css">
+    .fl {
+        float: left;
+    }
+    
+    .fr {
+        float: right;
+    }
+    
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+    
+    body {
+        line-height: 1;
+        background: #f0eff5;
+    }
+    
+    ol,
+    ul {
+        list-style: none;
+    }
+    
+    blockquote,
+    q {
+        quotes: none;
+    }
+    
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+    
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    /* add */
+    
+    body {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, "微软雅黑";
+    }
+    
+    body,
+    html {
+        height: 100%;
+    }
+    
+    img {
+        border: 0
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 100%;
+        font-weight: normal;
+    }
+    
+    select,
+    input {
+        vertical-align: middle
+    }
+    
+    .clear {
+        display: block !important;
+        clear: both !important;
+        float: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+    
+    .clearfix {
+        zoom: 1;
+    }
+    
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+    
+    .spacer {
+        clear: both;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+    }
+    
+    a {
+        color: #333;
+        text-decoration: none
+    }
+    
+    a:hover {
+        color: #f00;
+    }
+    
+    img,
+    input,
+    label {
+        vertical-align: middle;
+    }
+    
+    body {
+        background: #E5E5E5;
+    }
+    
+    #app {
+        position: relative;
+        padding: 15px 10px;
+    }
+    
+    .shuoming {
+        margin-bottom: 15px;
+        font-family: Bio Sans;
+        font-size: 16px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    
+    .addWallet {
+        position: relative;
+        margin-top: 10px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background: #8E8787;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    .addWallet p {
+        font-family: Bio Sans;
+        font-size: 20px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
+    
+    .list {
+        position: relative;
+        height: 156px;
+        background: linear-gradient(62.2deg, #0070C8 63.23%, rgba(154, 200, 255, 0.53) 100%);
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .list .name {
+        position: absolute;
+        font-family: Bio Sans;
+        font-size: 20px;
+        color: #FFFFFF;
+        left: 50px;
+        top: 44px;
+    }
+    
+    .list .address {
+        position: absolute;
+        font-family: Bio Sans;
+        font-size: 12px;
+        color: #FFFFFF;
+        left: 50px;
+        top: 78px;
+    }
+    
+    .list .tip {
+        position: absolute;
+        font-family: Bio Sans;
+        font-size: 12px;
+        color: #FFFFFF;
+        left: 5px;
+        bottom: 25px;
+    }
+    
+    .list .tip1 {
+        position: absolute;
+        font-family: Bio Sans;
+        font-size: 12px;
+        color: #FFFFFF;
+        left: 5px;
+        bottom: 10px;
+    }
+    
+    .addWallet .tupian {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 160px;
+        height: 102px;
+    }
+    
+    [v-cloak] {
+        display: none;
+    }
+    
+    .row {
+        padding: 5px 5px;
+        font-size: 16px;
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="shuoming">
+            锁币合约列表
+        </div>
+
+        <div class="list" v-on:click="clickItem(item)" v-for="(item,index) in walletList" v-on:click="clickItem(item)">
+            <!-- 0 预备中 //参与 1 待发布 did是自己 //上链 2 充值 // 充值按钮 3 锁币中 //解锁 4 解锁 //无按钮  -->
+            <div class="item">
+                <div class="row">锁币合约名字：<span>{{item.name}}</span></div>
+                <div class="row" v-if="item.status===0">锁币合约状态：<span>预备中</span></div>
+                <div class="row" v-if="item.status===1">锁币合约状态：<span>待发布</span></div>
+                <div class="row" v-if="item.status==2">锁币合约状态：<span>充值</span></div>
+                <div class="row" v-if="item.status==3">锁币合约状态：<span>锁币中</span></div>
+                <div class="row" v-if="item.status==4">锁币合约状态：<span>解锁</span></div>
+                <div class="row" v-if="item.status==99">锁币合约状态：<span>待锁币</span></div>
+                <div class="row">发起人昵称：<span>{{item.creator_nickname}}</span></div>
+                <div class="row">发起人did：<span>{{item.creator_did}}</span></div>
+                <div class="row">参与人数量：<span>{{item.participant_num}}</span></div>
+                <div class="row">金额列表：<span>{{handleToken(item.tokens)}}</span></div>
+            </div>
+        </div>
+
+        <div class="addWallet" v-on:click="createWallet">
+            <p>+ 创建锁币合约</p>
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            loading: true,
+            zh: {
+
+            },
+            en: {
+
+            },
+            curLangule: {},
+            curLanguleKey: 'zh',
+            walletList: [],
+            schemeConfig: {
+                "AppID": "87b4d16175ae9227e5ee1a0d5c3550a3b3ec4142fdb1227f3a5c518850afe1e00bfaf746e3c65f3c45e99227b24fb9292d5babe55f4eb0764ae7c91bf607919d",
+                "AppName": "Lock Wallet",
+                "DID": "iVLS29Nd5e19GMek6bJ843UjqAfKcbWzzm",
+                "PublicKey": "03e355b4c1b024643e79b5e47eb6d6103254dea4bd475c916d4bf0c617bb9afbe8",
+                "ReturnUrl": "",
+                "RequestInfo": "Nickname"
+            },
+            dataContent: ""
+        },
+        methods: {
+            handleToken(item) {
+                var url = "";
+                _.forEach(item, function(item1, index) {
+                    url += item1["chain_type"] + ':' + item1["token_num"] + ",";
+                });
+                return url.substring(0, url.length - 1);
+            },
+            getLanugle: function() {
+                this.curLangule = this.en;
+                this.curLanguleKey = 'en';
+                var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+                if (JsSrc.indexOf('zh') >= 0) {
+                    // 假如浏览器语言是中文
+                    this.curLanguleKey = 'zh';
+                    this.curLangule = this.zh;
+                } else if (JsSrc.indexOf('en') >= 0) {
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                } else {
+                    // 假如浏览器语言是其它语言
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                }
+            },
+            createWallet() {
+                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/createContract.html";
+                var url = this.buildIdentity();
+                //拼接大象钱包过度页面
+                var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                //跳转
+                location.href = turl;
+                // location.href = './createContract.html?Data=' + this.dataContent;
+            },
+            buildIdentity() {
+                var url = "elaphant://identity?";
+                _.forEach(this.schemeConfig, function(val, key, index) {
+                    if (key === 'ReturnUrl') {
+                        val = encodeURIComponent(val);
+                    }
+                    url += key + '=' + val + '&';
+                });
+                return url.substring(0, url.length - 1);
+
+                return url;
+            },
+            clickItem(item) {
+                /**
+                0	预备中	//参与
+                1	待发布	did是自己 //上链
+                2	充值	// 充值按钮	
+                3	锁币中	//解锁
+                4	解锁   //无按钮
+                */
+                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/participants.html?id=" + encodeURIComponent(JSON.stringify(item));
+                var url = this.buildIdentity();
+                //拼接大象钱包过度页面
+                var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                //跳转
+                location.href = turl;
+                //location.href = 'walletDetails.html?' + 'Address=' + address;
+                console.log("=============" + item.id);
+                //location.href = 'participants.html?Data=' + this.dataContent + "&id=" + item.id;
+            },
+            GetQueryString(name) {　　　
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);　　　
+                if (r != null) return (r[2]);　　　
+                return null;
+            },
+            getLockWalletList() {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/getLockWalletList',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            }
+
+        },
+        mounted() {
+            this.getLockWalletList().then(res => {
+                if (res.status === 0) {
+                    this.walletList = res.result || [];
+                }
+                console.log("==========" + JSON.stringify(res));
+            }).catch(() => {
+
+            });
+            this.getLanugle();
+            // var data = this.GetQueryString("Data") || "";
+            // if (data === "") {
+
+            // } else {
+            //     this.dataContent = data;
+            // }
+        }
+    });
+</script>
+
+</html>

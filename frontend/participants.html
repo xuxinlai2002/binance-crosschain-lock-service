@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>参与合约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <!-- <script src="./js/vue-clipboard.min.js"></script> -->
+</head>
+<style type="text/css">
+    .fl {
+        float: left;
+    }
+    
+    .fr {
+        float: right;
+    }
+    
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+    
+    body {
+        line-height: 1;
+        background: #f0eff5;
+    }
+    
+    ol,
+    ul {
+        list-style: none;
+    }
+    
+    blockquote,
+    q {
+        quotes: none;
+    }
+    
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+    
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    /* add */
+    
+    body {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, "微软雅黑";
+    }
+    
+    body,
+    html {
+        height: 100%;
+    }
+    
+    img {
+        border: 0
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 100%;
+        font-weight: normal;
+    }
+    
+    select,
+    input {
+        vertical-align: middle
+    }
+    
+    .clear {
+        display: block !important;
+        clear: both !important;
+        float: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+    
+    .clearfix {
+        zoom: 1;
+    }
+    
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+    
+    .spacer {
+        clear: both;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+    }
+    
+    a {
+        color: #333;
+        text-decoration: none
+    }
+    
+    a:hover {
+        color: #f00;
+    }
+    
+    img,
+    input,
+    label {
+        vertical-align: middle;
+    }
+    
+    body {
+        background: #E5E5E5;
+    }
+    
+    #app {
+        position: relative;
+        padding: 15px 10px;
+    }
+    
+    .left {
+        width: 80%;
+        height: 48px;
+        line-height: 48px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .left span {
+        font-family: Bio Sans;
+        font-size: 20px;
+        color: #0070C8;
+    }
+    
+    .left .tr {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        resize: none;
+        border: 0;
+        vertical-align: middle;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+        height: 48px;
+    }
+    
+    .left .tr::-webkit-input-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* 使用webkit内核的浏览器 */
+    
+    .left .tr:-moz-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* Firefox版本4-18 */
+    
+    .left .tr::-moz-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* Firefox版本19+ */
+    
+    .left .tr:-ms-input-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    
+    .right {
+        width: 20%;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+    }
+    
+    .right span {
+        font-family: Bio Sans;
+        font-size: 14px;
+        text-align: center;
+        color: #0070C8;
+        border: 1px solid #0070C8;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 5px 10px;
+    }
+    
+    .del {
+        position: relative;
+    }
+    
+    .del .jianhao {
+        color: #FF3365;
+        width: 10px;
+        height: 2px;
+    }
+    
+    .add {
+        position: relative;
+    }
+    
+    .three {
+        position: relative;
+        margin-top: 64px;
+        height: 92px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .three .one {
+        margin: 0px 15px;
+        height: 46px;
+        line-height: 46px;
+        border-bottom: 1px solid #CCCCCC;
+    }
+    
+    .three .second {
+        margin: 0px 15px;
+        height: 46px;
+        line-height: 46px;
+    }
+    
+    .three .second .jishu {
+        text-align: center;
+        width: 86px;
+        height: 32px;
+        line-height: 32px;
+        border: 1px solid #DEDEE0;
+        box-sizing: border-box;
+        border-radius: 100px;
+        margin-top: 8px;
+    }
+    
+    .four {
+        width: 220px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .four p {
+        font-family: Bio Sans;
+        font-size: 16px;
+        margin-top: 30px;
+        width: 220px;
+        line-height: 44px;
+        height: 44px;
+        background: #0070C8;
+        border-radius: 200px;
+        color: #FFFFFF;
+    }
+    
+    .walletname {
+        position: relative;
+        width: 100%;
+        margin: 8px 0px;
+    }
+    
+    .walletname input {
+        -moz-box-sizing: border-box;
+        /*Firefox3.5+*/
+        -webkit-box-sizing: border-box;
+        /*Safari3.2+*/
+        -o-box-sizing: border-box;
+        /*Opera9.6*/
+        -ms-box-sizing: border-box;
+        /*IE8*/
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 0px;
+        padding-left: 10px;
+        margin: 0;
+        resize: none;
+        border: 0;
+        vertical-align: middle;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .toast {
+        position: fixed;
+        z-index: 2000;
+        left: 50%;
+        top: 25%;
+        transition: all .5s;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        border-radius: 5px;
+        color: #FFF;
+        background: rgba(17, 17, 17, 0.7);
+        height: 45px;
+        line-height: 45px;
+        padding: 0 15px;
+        width: 200px;
+    }
+    
+    [v-cloak] {
+        display: none;
+    }
+    
+    select {
+        padding: 8px 0px;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .add {
+        display: inline-block;
+        text-align: center;
+        background-color: #0070C8;
+        color: #ffffff;
+        width: 100%;
+        height: 33px;
+        line-height: 33px;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="toast" v-show="toastShow">
+            {{toastText}}
+        </div>
+        <span style="padding:8px 0px;">名称</span>
+        <div class="walletname">
+            <input v-model="name" placeholder="名称" readonly="readonly" />
+        </div>
+        <span style="padding:8px 0px;">短描述</span>
+        <div class="walletname">
+            <input v-model="des" placeholder="短描述" readonly="readonly" />
+        </div>
+        <span style="padding:8px 0px;">参与的币</span>
+        <div class="walletname" style="padding:5px 0px;border-top:1px solid rgb(169, 169, 169)" v-if="coinList.length>0">
+            <div style="margin-bottom: 5px;border-bottom:1px solid rgb(169, 169, 169);height:30px;line-height: 30px" v-for="(item,index) in coinList">
+                <span style="display:inline-block;width: 40%;text-align:left;margin-left: 10px;">{{codes[item.chain_type].name}}</span>
+                <span style="display:inline-block;width: 40%;text-align: center">{{item.token_num}}</span>
+            </div>
+        </div>
+        <span style="padding:8px 0px;">解锁条件</span>
+        <div class="walletname">
+            <input v-model="unlocking" placeholder="解锁条件" readonly="readonly" />
+        </div>
+        <span style="padding:8px 0px;">解锁高度间隔</span>
+        <div class="walletname">
+            <input v-model="unlockingHeightInterval" placeholder="解锁高度间隔" readonly="readonly" />
+        </div>
+        <span style="padding:8px 0px;">启动高度间隔</span>
+        <div class="walletname">
+            <input v-model="startHeightInterval" placeholder="启动高度间隔" readonly="readonly" />
+        </div>
+        <div class="walletname" style="height: 40px;" v-if="status ===0">
+            <select style="width: 40%;float: left;" v-model="curCoin">
+            <option :value ="item.chain_type" v-for="(item,key) in coinList">{{codes[item.chain_type].name}}</option>
+          </select>
+            <div style="width: 58%;float: left;margin: 0px 5px">
+                <input v-model="curNum" placeholder="数量" />
+            </div>
+        </div>
+        <div class="walletname">
+            <input v-model="startPassword" placeholder="解锁密码" />
+        </div>
+
+        <div class="four" v-on:click="createWallet" v-if="status ===0">
+            <p>参与</p>
+        </div>
+
+        <div class="four" v-on:click="createWallet" v-if="status ===1&&did===creator_did">
+            <p>上链</p>
+        </div>
+
+        <div class="four" v-on:click="createWallet" v-if="status ===2">
+            <p>充值</p>
+        </div>
+
+        <div class="four" v-on:click="createWallet" v-if="status ===99&&did===creator_did">
+            <p>锁币按钮</p>
+        </div>
+
+        <div class="four" v-on:click="createWallet" v-if="status ===3">
+            <p>解锁</p>
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            loading: true,
+            zh: {
+
+            },
+            en: {
+
+            },
+            curLangule: {},
+            curLanguleKey: 'zh',
+            toastShow: false,
+            toastText: '',
+            codes: {
+                "ELA_ETH": {
+                    name: "ELA以太坊测链"
+                },
+                "ETH": {
+                    name: "ETH主链币"
+                },
+                "ELA": {
+                    name: "ELA主链币"
+                },
+
+            },
+            coinList: [],
+            coinNumber: "",
+            selectCoin: "ELA_ETH",
+            name: "test",
+            des: "test",
+            unlocking: "test", //解锁条件
+            unlockingHeightInterval: "test", //解锁高度间隔
+            startHeightInterval: "test", //启动高度间隔
+            status: 3,
+            /**
+                         0	预备中	//参与
+                         1	待发布	did是自己 //上链
+                         2	充值	// 充值按钮	
+                         3	锁币中	//解锁
+                         4	解锁   //无按钮
+                         */
+            startPassword: "",
+            did: "",
+            nickName: "",
+            dataContent: "",
+            activity: "",
+            curCoin: "ELA",
+            curNum: "",
+            creator_did: "",
+        },
+        methods: {
+            GetQueryString(name) {　　　
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);　　　
+                if (r != null) return (r[2]);　　　
+                return null;
+            },
+            getLen2(str) {　　　　 //将中文替换成两个英文字符来统计
+                return str.replace(/[^\x00-\xff]/g, "aa").length;
+            },
+            getLanugle: function() {
+                this.curLangule = this.en;
+                this.curLanguleKey = 'en';
+                var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+                if (JsSrc.indexOf('zh') >= 0) {
+                    // 假如浏览器语言是中文
+                    this.curLanguleKey = 'zh';
+                    this.curLangule = this.zh;
+                } else if (JsSrc.indexOf('en') >= 0) {
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                } else {
+                    // 假如浏览器语言是其它语言
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                }
+            },
+            createWallet() {
+
+                switch (this.status) {
+                    case 0:
+                        this.canyu();
+                        break;
+                    case 1:
+                        this.shanglian();
+                        break;
+                    case 99:
+                        this.suobi();
+                        break;
+                    case 2:
+                        this.charge();
+                        break;
+                    case 3:
+                        this.jiesuo();
+                        break;
+                }
+
+
+            },
+            suobi() {
+                if (this.startPassword === "") {
+                    this.toast("请输入密码");
+                    return;
+                }
+                this.suobiHttp().then((res) => {
+                    if (res.status === 0) {
+                        location.href = 'index.html';
+                        this.toast("锁币成功");
+                    }
+                }).catch(() => {
+
+                });
+            },
+            suobiHttp() {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity + '&launch_key=' + this.startPassword,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            },
+            shanglian() {
+                this.createHeYue().then((res) => {
+                    if (res.status === 0) {
+                        location.href = 'index.html';
+                        this.toast("上链成功");
+                    }
+                });
+
+            },
+            canyu() {
+                if (this.startPassword === "") {
+                    this.toast("请输入解锁密码");
+                    retrun;
+                }
+
+                if (this.curNum === "") {
+                    this.toast("请输入参与数量");
+                    retrun;
+                }
+
+                this.postParticipantsInfo().then((res) => {
+                    console.log("==================" + JSON.stringify(res));
+                }).catch(() => {
+
+                });
+
+            },
+            charge() {
+                var num = 0.0001;
+                location.href = './recharge.html?' + 'elaNum=' + num + '&' + 'address=' + '8ZCY9ksW4bxz7FCYARkXYCGmgkzABTSvwB';
+            },
+            jiesuo() {
+                if (this.startPassword === "") {
+                    this.toast("请输入解锁密码");
+                    return false;
+                }
+
+                this.jiesuoheyue().then((res) => {
+                    if (res.status === 0) {
+                        location.href = 'index.html';
+                        this.toast("上链成功");
+                    }
+                }).catch(() => {
+
+                });
+            },
+            doCopy(publickey) {
+                var v = this;
+                this.$copyText(publickey).then(function(e) {
+                    v.toast(v.curLangule['key29']);
+                }, function(e) {})
+            },
+            toast(str) {
+                var v = this;
+                v.toastText = str
+                v.toastShow = true
+                setTimeout(function() {
+                    v.toastShow = false
+                }, 1500)
+            },
+            checkParms() {
+                if (this.startPassword === "") {
+                    this.toast("请输入启动密码");
+                    return false;
+                }
+                return true;
+            },
+            isExitWalletName(name) {
+                var isName = false;
+                if (this.coinList.length > 0) {
+                    _.forEach(this.coinList, function(val, index) {
+                        if (val['code'] === name) {
+                            isName = true;
+                        }
+                    });
+                }
+                return isName;
+            },
+            createHeYue() {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            },
+            jiesuoheyue() {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity + '&unlock_key=' + this.startPassword + "&paticipator_did=" + this.did,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            },
+            postParticipantsInfo() {
+                var parm = {
+                    "activity_id": this.activity,
+                    "participator_did": this.did,
+                    "participator_nickname": this.nickName,
+                    "token_type": this.curCoin,
+                    "token_num": this.curNum,
+                    "participator_key_hash": this.startPassword
+                }
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/postParticipantsInfo',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                })
+            },
+            getLockWalletDetail() {
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?activity=' + this.activity,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'GET',
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+                });
+            }
+        },
+        mounted() {
+            var data = this.GetQueryString("Data") || "";
+            data = JSON.parse(decodeURIComponent(data));
+            this.did = data["DID"];
+            this.nickName = data["Nickname"];
+
+            var item = decodeURIComponent(this.GetQueryString("id")) || "";
+            console.log("========item===" + JSON.stringify(item));
+            item = JSON.parse(item);
+            this.activity = item.id
+            console.log("==============this.activity" + this.activity);
+            this.creator_did = item.creator_did;
+            console.log("==============creator_did" + this.creator_did);
+            this.getLockWalletDetail().then((res) => {
+                if (res.status === 0) {
+                    console.log("==========" + JSON.stringify(res));
+                    var data = res.result || [];
+                    this.name = data["name"] || "";
+                    this.status = data["status"] || 0;
+                    //this.creator_did = data["creator_did"];
+                    this.coinList = data["tokens"] || [];
+                    this.curCoin = data["tokens"][0]["chain_type"];
+                    this.unlockingHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
+                    this.startHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
+                    this.unlocking = data["unlock_num"] || "";
+
+                }
+            }).catch(() => {
+
+            });
+            this.getLanugle();
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>创建合约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="./js/md5.min.js"></script>
+    <!-- <script src="./js/vue-clipboard.min.js"></script> -->
+</head>
+<style type="text/css">
+    .fl {
+        float: left;
+    }
+    
+    .fr {
+        float: right;
+    }
+    
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+    
+    body {
+        line-height: 1;
+        background: #f0eff5;
+    }
+    
+    ol,
+    ul {
+        list-style: none;
+    }
+    
+    blockquote,
+    q {
+        quotes: none;
+    }
+    
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+    
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    /* add */
+    
+    body {
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, "微软雅黑";
+    }
+    
+    body,
+    html {
+        height: 100%;
+    }
+    
+    img {
+        border: 0
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 100%;
+        font-weight: normal;
+    }
+    
+    select,
+    input {
+        vertical-align: middle
+    }
+    
+    .clear {
+        display: block !important;
+        clear: both !important;
+        float: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+    
+    .clearfix {
+        zoom: 1;
+    }
+    
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+    
+    .spacer {
+        clear: both;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+    }
+    
+    a {
+        color: #333;
+        text-decoration: none
+    }
+    
+    a:hover {
+        color: #f00;
+    }
+    
+    img,
+    input,
+    label {
+        vertical-align: middle;
+    }
+    
+    body {
+        background: #E5E5E5;
+    }
+    
+    #app {
+        position: relative;
+        padding: 15px 10px;
+    }
+    
+    .left {
+        width: 80%;
+        height: 48px;
+        line-height: 48px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .left span {
+        font-family: Bio Sans;
+        font-size: 20px;
+        color: #0070C8;
+    }
+    
+    .left .tr {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        resize: none;
+        border: 0;
+        vertical-align: middle;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+        height: 48px;
+    }
+    
+    .left .tr::-webkit-input-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* 使用webkit内核的浏览器 */
+    
+    .left .tr:-moz-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* Firefox版本4-18 */
+    
+    .left .tr::-moz-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    /* Firefox版本19+ */
+    
+    .left .tr:-ms-input-placeholder {
+        height: 48px;
+        line-height: 48px;
+    }
+    
+    .right {
+        width: 20%;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+    }
+    
+    .right span {
+        font-family: Bio Sans;
+        font-size: 14px;
+        text-align: center;
+        color: #0070C8;
+        border: 1px solid #0070C8;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 5px 10px;
+    }
+    
+    .del {
+        position: relative;
+    }
+    
+    .del .jianhao {
+        color: #FF3365;
+        width: 10px;
+        height: 2px;
+    }
+    
+    .add {
+        position: relative;
+    }
+    
+    .three {
+        position: relative;
+        margin-top: 64px;
+        height: 92px;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .three .one {
+        margin: 0px 15px;
+        height: 46px;
+        line-height: 46px;
+        border-bottom: 1px solid #CCCCCC;
+    }
+    
+    .three .second {
+        margin: 0px 15px;
+        height: 46px;
+        line-height: 46px;
+    }
+    
+    .three .second .jishu {
+        text-align: center;
+        width: 86px;
+        height: 32px;
+        line-height: 32px;
+        border: 1px solid #DEDEE0;
+        box-sizing: border-box;
+        border-radius: 100px;
+        margin-top: 8px;
+    }
+    
+    .four {
+        width: 220px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .four p {
+        font-family: Bio Sans;
+        font-size: 16px;
+        margin-top: 30px;
+        width: 220px;
+        line-height: 44px;
+        height: 44px;
+        background: #0070C8;
+        border-radius: 200px;
+        color: #FFFFFF;
+    }
+    
+    .walletname {
+        position: relative;
+        width: 100%;
+        margin: 10px 0px;
+    }
+    
+    .walletname input {
+        -moz-box-sizing: border-box;
+        /*Firefox3.5+*/
+        -webkit-box-sizing: border-box;
+        /*Safari3.2+*/
+        -o-box-sizing: border-box;
+        /*Opera9.6*/
+        -ms-box-sizing: border-box;
+        /*IE8*/
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 0px;
+        padding-left: 10px;
+        margin: 0;
+        resize: none;
+        border: 0;
+        vertical-align: middle;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .toast {
+        position: fixed;
+        z-index: 2000;
+        left: 50%;
+        top: 25%;
+        transition: all .5s;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        text-align: center;
+        border-radius: 5px;
+        color: #FFF;
+        background: rgba(17, 17, 17, 0.7);
+        height: 45px;
+        line-height: 45px;
+        padding: 0 15px;
+        width: 200px;
+    }
+    
+    [v-cloak] {
+        display: none;
+    }
+    
+    select {
+        padding: 8px 0px;
+        outline: none;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+    
+    .add {
+        display: inline-block;
+        text-align: center;
+        background-color: #0070C8;
+        color: #ffffff;
+        width: 100%;
+        height: 33px;
+        line-height: 33px;
+        box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="toast" v-show="toastShow">
+            {{toastText}}
+        </div>
+        <div class="walletname">
+            <input v-model="name" placeholder="名称" />
+        </div>
+        <div class="walletname">
+            <input v-model="des" placeholder="短描述" />
+        </div>
+
+        <div class="walletname" style="padding:5px 0px;border-top:1px solid rgb(169, 169, 169)" v-if="coinList.length>0">
+            <div style="margin-bottom: 5px;border-bottom:1px solid rgb(169, 169, 169);height:30px;line-height: 30px" v-for="(item,index) in coinList" v-on:click="del(index)">
+                <span style="display:inline-block;width: 40%;text-align:left;margin-left: 10px">{{codes[item.chain_type].name}}</span>
+                <span style="display:inline-block;width: 40%;text-align: center">{{item.token_num}}</span>
+                <span style="display:inline-block;width: 15%;text-align: center;color: #0070C8">删除</span>
+            </div>
+        </div>
+
+        <div class="walletname" style="height: 40px;">
+            <select style="width: 40%;float: left;" v-model="selectCoin">
+            <option :value ="key" v-for="(item,key) in codes">{{item.name}}</option>
+          </select>
+            <div style="width: 36%;float: left;margin: 0px 5px">
+                <input v-model="coinNumber" placeholder="数量" />
+            </div>
+
+            <div style="width: 20%;float: left;">
+                <span class="add" v-on:click="add">添加</span>
+            </div>
+        </div>
+        <div class="walletname">
+            <input v-model="participant_num" placeholder="总的参加人数" />
+        </div>
+        <div class="walletname">
+            <input v-model="unlocking" placeholder="解锁条件" />
+        </div>
+        <div class="walletname">
+            <input v-model="unlockingHeightInterval" placeholder="解锁高度间隔" />
+        </div>
+        <div class="walletname">
+            <input v-model="startHeightInterval" placeholder="启动高度间隔" />
+        </div>
+        <div class="walletname">
+            <input v-model="startPassword" placeholder="启动密码" />
+        </div>
+
+        <div class="four" v-on:click="createWallet">
+            <p>提交</p>
+        </div>
+
+
+
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            loading: true,
+            zh: {
+
+            },
+            en: {
+
+            },
+            curLangule: {},
+            schemeConfig: {
+                "AppID": "87b4d16175ae9227e5ee1a0d5c3550a3b3ec4142fdb1227f3a5c518850afe1e00bfaf746e3c65f3c45e99227b24fb9292d5babe55f4eb0764ae7c91bf607919d",
+                "AppName": "Lock Wallet",
+                "DID": "iVLS29Nd5e19GMek6bJ843UjqAfKcbWzzm",
+                "PublicKey": "03e355b4c1b024643e79b5e47eb6d6103254dea4bd475c916d4bf0c617bb9afbe8",
+                "ReturnUrl": "",
+            },
+            curLanguleKey: 'zh',
+            toastShow: false,
+            toastText: '',
+            codes: {
+                "ELA_ETH": {
+                    name: "ELA以太坊测链"
+                },
+                "ELA": {
+                    name: "ELA主链"
+                }
+            },
+            coinList: [],
+            coinNumber: "",
+            selectCoin: "ELA_ETH",
+            name: "亦来云活动",
+            des: "ss",
+            unlocking: "5", //解锁条件
+            unlockingHeightInterval: "10", //解锁高度间隔
+            startHeightInterval: "1000", //启动高度间隔
+            startPassword: "123456",
+            did: "",
+            nickName: "",
+            dataContent: "",
+            participant_num: "10"
+        },
+        methods: {
+            GetQueryString(name) {　　　
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);　　　
+                if (r != null) return (r[2]);　　　
+                return null;
+            },
+            getLen2(str) {　　　　 //将中文替换成两个英文字符来统计
+                return str.replace(/[^\x00-\xff]/g, "aa").length;
+            },
+            getLanugle: function() {
+                this.curLangule = this.en;
+                this.curLanguleKey = 'en';
+                var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+                if (JsSrc.indexOf('zh') >= 0) {
+                    // 假如浏览器语言是中文
+                    this.curLanguleKey = 'zh';
+                    this.curLangule = this.zh;
+                } else if (JsSrc.indexOf('en') >= 0) {
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                } else {
+                    // 假如浏览器语言是其它语言
+                    this.curLangule = this.en;
+                    this.curLanguleKey = 'en';
+                }
+            },
+            createWallet() {
+                if (this.checkParms()) {
+                    this.postAuthorInfo().then(res => {
+                        console.log("=========" + JSON.stringify(res));
+                        if (res.status === 0) {
+                            location.href = 'index.html';
+                        }
+                    }).catch(() => {
+
+                    });
+                }
+            },
+            del(index) {
+                this.coinList.splice(index, 1);
+                this.toast("删除成功")
+            },
+            doCopy(publickey) {
+                var v = this;
+                this.$copyText(publickey).then(function(e) {
+                    v.toast(v.curLangule['key29']);
+                }, function(e) {})
+            },
+            add() {
+                if (this.isExitWalletName(this.selectCoin)) {
+                    this.toast("选择币种已经添加过");
+                    return;
+                }
+                if (this.coinNumber === "" || this.coinNumber <= 0) {
+                    this.toast("请输入添加币种数量");
+                    return;
+                }
+                this.coinList.push({
+                    chain_type: this.selectCoin,
+                    token_num: this.coinNumber
+                });
+
+                this.coinNumber = "";
+
+
+            },
+            toast(str) {
+                var v = this;
+                v.toastText = str
+                v.toastShow = true
+                setTimeout(function() {
+                    v.toastShow = false
+                }, 1500)
+            },
+            checkParms() {
+                if (this.name === "") {
+                    this.toast("请输入名字");
+                    return false;
+                }
+
+                if (this.getLen2(name) > 30) {
+                    this.toast("名字太长");
+                    return false;
+                }
+
+                if (this.coinList.length === 0) {
+                    this.toast("添加币种");
+                    return false;
+                }
+
+                if (this.unlocking === "") {
+                    this.toast("请输入解锁条件");
+                    return false;
+                }
+
+                if (this.unlocking === "") {
+                    this.toast("请输入解锁条件");
+                    return false;
+                }
+
+                if (this.unlockingHeightInterval === "") {
+                    this.toast("请输入解锁高度间隔");
+                    return false;
+                }
+
+                if (this.startHeightInterval === "") {
+                    this.toast("请输入启动时间间隔");
+                    return false;
+                }
+
+                if (this.startPassword === "") {
+                    this.toast("请输入启动密码");
+                    return false;
+                }
+                return true;
+            },
+            isExitWalletName(name) {
+                var isName = false;
+                if (this.coinList.length > 0) {
+                    _.forEach(this.coinList, function(val, index) {
+                        if (val['code'] === name) {
+                            isName = true;
+                        }
+                    });
+                }
+                return isName;
+            },
+            postAuthorInfo() {
+                var hash = md5.create();
+                hash.update(this.startPassword);
+                var md5s = hash.hex();
+                var token = [];
+                for (var i = 0; i < this.coinList.length; i++) {
+                    var item = this.coinList[i];
+                    item["launch_block_inteval"] = this.unlockingHeightInterval;
+                    item["unlock_block_interval"] = this.startHeightInterval;
+                    token.push(item);
+
+                }
+                var parms = {
+                    "name": this.name,
+                    "status": 0,
+                    "launch_key_hash": md5s,
+                    "creator_did": this.did,
+                    "creator_nickname": this.nickName,
+                    "participant_num": this.participant_num,
+                    "unlock_num": this.unlocking,
+                    "tokens": token
+                };
+                return new Promise((resovle, reject) => {
+                    $.ajax({
+                        url: 'http://172.20.10.2:3002/api/postCreatorInfo',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        type: 'POST',
+                        data: JSON.stringify(parms),
+                        success: function(data) { //成功回调函数
+                            resovle(data);
+                        },
+                        error: function(err) { //失败回调函数
+                            reject(err);
+                        }
+                    });
+
+
+                })
+            }
+        },
+        mounted() {
+            var data = this.GetQueryString("Data") || "";
+            this.dataContent = data;
+            console.log("=======" + decodeURIComponent(data));
+            data = JSON.parse(decodeURIComponent(data));
+            this.did = data["DID"];
+            this.nickName = data["Nickname"];
+            console.log("did===" + data["DID"]);
+            console.log("Nickname====" + data["Nickname"]);
+            this.getLanugle();
+        }
+    });
+</script>
+
+</html>
