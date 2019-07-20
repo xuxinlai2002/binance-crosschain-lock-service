@@ -471,16 +471,29 @@
         mounted() {
 
             this.getLanugle();
+            var dataContent = localStorage.getItem('Lock-Wallet') || "";
             var data = this.GetQueryString("Data") || "";
-            if (data === "") {
+            if (dataContent === "" && data === "") {
+                //this.walletList = {};
                 this.schemeConfig["ReturnUrl"] = "http://10.2.3.49:1024/index.html";
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 location.href = turl;
             } else {
-                this.dataContent = data;
+                localStorage.setItem('Lock-Wallet', data);
+                this.dataContent = dataContent;
             }
+            // var data = this.GetQueryString("Data") || "";
+            // if (data === "") {
+            //     this.schemeConfig["ReturnUrl"] = "http://10.2.3.49:1024/index.html";
+            //     var url = this.buildIdentity();
+            //     //拼接大象钱包过度页面
+            //     var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+            //     location.href = turl;
+            // } else {
+            //     this.dataContent = data;
+            // }
 
             this.getLockWalletList().then(res => {
                 if (res.status === 0) {
