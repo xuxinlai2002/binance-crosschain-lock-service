@@ -743,7 +743,7 @@
             suobiHttp() {
                 return new Promise((resovle, reject) => {
                     $.ajax({
-                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity + '&launch_key=' + this.startPassword,
+                        url: 'http://172.20.10.2:3002/api/v1/contract/launch?id=' + this.activity + '&launch_key=' + this.startPassword,
                         dataType: 'json',
                         contentType: 'application/json',
                         type: 'GET',
@@ -854,7 +854,7 @@
             jiesuoheyue() {
                 return new Promise((resovle, reject) => {
                     $.ajax({
-                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity + '&unlock_key=' + this.startPassword + "&paticipator_did=" + this.did,
+                        url: 'http://172.20.10.2:3002/api/v1/contract/unlock?id=' + this.activity + '&unlock_key=' + this.startPassword + "&paticipator_did=" + this.did,
                         dataType: 'json',
                         contentType: 'application/json',
                         type: 'GET',
