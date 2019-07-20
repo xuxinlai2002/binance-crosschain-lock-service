@@ -454,7 +454,7 @@
             getLockWalletList() {
                 return new Promise((resovle, reject) => {
                     $.ajax({
-                        url: 'http://172.20.10.2:3002/api/getLockWalletList',
+                        url: 'http://10.2.3.49:3002/api/getLockWalletList',
                         dataType: 'json',
                         contentType: 'application/json',
                         type: 'GET',
@@ -473,7 +473,7 @@
             this.getLanugle();
             var data = this.GetQueryString("Data") || "";
             if (data === "") {
-                this.schemeConfig["ReturnUrl"] = "http://172.20.10.2:1024/index.html";
+                this.schemeConfig["ReturnUrl"] = "http://10.2.3.49:1024/index.html";
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
