@@ -12,11 +12,10 @@ import creatorInfo from 'modules/api/controllers/post_creator_info'
 import participantsInfo from 'modules/api/controllers/post_participants_info'
 
 // import post from 'modules/api/controllers/create_contract'
-
-import lockWalletList from 'modules/api/controllers/get_lock_wallet_list'
-import lockWalletDetail from 'modules/api/controllers/get_lock_wallet_Detail'
-import creatorInfo from 'modules/api/controllers/post_creator_info'
-import participantsInfo from 'modules/api/controllers/post_participants_info'
+// import lockWalletList from 'modules/api/controllers/get_lock_wallet_list'
+// import lockWalletDetail from 'modules/api/controllers/get_lock_wallet_Detail'
+// import creatorInfo from 'modules/api/controllers/post_creator_info'
+// import participantsInfo from 'modules/api/controllers/post_participants_info'
 
 export default app => {
     // demo
