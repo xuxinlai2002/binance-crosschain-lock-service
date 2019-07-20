@@ -484,10 +484,10 @@
             <input v-model="unlocking" placeholder="最少解锁人数" />
         </div>
         <div class="walletname">
-            <input v-model="unlockingHeightInterval" placeholder="解锁高度间隔" />
+            <input v-model="startHeightInterval" placeholder="启动高度间隔" />
         </div>
         <div class="walletname">
-            <input v-model="startHeightInterval" placeholder="启动高度间隔" />
+            <input v-model="unlockingHeightInterval" placeholder="解锁高度间隔" />
         </div>
         <div class="walletname">
             <input v-model="startPassword" placeholder="启动密码" type="password" />
@@ -543,8 +543,8 @@
             name: "",
             des: "",
             unlocking: "", //解锁条件
-            unlockingHeightInterval: "", //解锁高度间隔
-            startHeightInterval: "", //启动高度间隔
+            unlockingHeightInterval: "9999", //解锁高度间隔
+            startHeightInterval: "8888", //启动高度间隔
             startPassword: "",
             did: "",
             nickName: "",
