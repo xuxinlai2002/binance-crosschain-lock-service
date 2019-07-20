@@ -31,7 +31,7 @@ export default app => {
     // launch contract
     app.get("/v1/contract/launch",launch_contract.details);
     // join contract
-    // app.get("/v1/contract/transfer",transfer_contract.details);
+    app.get("/v1/contract/transfer",transfer_contract.details);
     // unlock contract
     app.get("/v1/contract/unlock",unlock_contract.details);
     // recharge callBack
