@@ -16,14 +16,16 @@ import keyth from 'keythereum'
 
 exports.details = async function (req,res) {
 
+    const to = req.query.to
     //-------------- 1
-    var keyobj=keyth.importFromFile('0xa719ffdb0e957b41ed8aae331ccd6baa685a0d43','/Users/clark/Library/ELA_Ethereum');
+    const from = '0x068222eb69837a5e6f406967e7181b249741dd53'
+    var keyobj=keyth.importFromFile(from ,'/Users/clark/Library/ELA_Ethereum');
     var privateKey=new Buffer(keyth.recover('elastos',keyobj),'hex');
-    const nonce = await web3.eth.getTransactionCount('0xa719ffdb0e957b41ed8aae331ccd6baa685a0d43');
+    const nonce = await web3.eth.getTransactionCount(from);
     console.info(web3.utils.toWei('1','ether'))
     let tx1 = {
-        from: '0xa719ffdb0e957b41ed8aae331ccd6baa685a0d43',
-        to: '0xe3fCa8365113Cf8F287a005471Efa77BFF0c6bCD',
+        from: from,
+        to: to,
         value:web3.utils.toHex(web3.utils.toWei('1','ether'))
     };
     let gas = await web3.eth.estimateGas(tx1);
@@ -33,7 +35,7 @@ exports.details = async function (req,res) {
         gas:web3.utils.toHex(gas),
         gasLimit : web3.utils.toHex(gas),
         gasPrice: web3.utils.toHex(gasPrice),
-        to: '0xe3fCa8365113Cf8F287a005471Efa77BFF0c6bCD',
+        to: to,
         value:web3.utils.toHex(web3.utils.toWei('1','ether'))
     };
     const tx = new Tx(rawTx);

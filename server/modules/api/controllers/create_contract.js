@@ -18,14 +18,13 @@ exports.details = async function (req,res) {
 
     //-------------- 1
     let id = req.query.id;
-    console.info(id);
     const [activity] = await query('select * from ccls_activity where id = ?',[id]);
     let launch_key_hash = activity[0].launch_key_hash
     let participant_num = activity[0].participant_num
     const [contracts] = await query('select * from ccls_contracts where activity_id = ? limit 1',[id]);
     let launch_block_inteval = contracts[0].launch_block_inteval
     let unlock_block_interval = contracts[0].unlock_block_interval
-    const [participators] = await query('select * from ccls_participators where contract_id = ? limit 1',[contracts[0].id]);
+    const [participators] = await query('select * from ccls_participators where contract_id = ?',[contracts[0].id]);
     let participator_key_hash = []
     for(var i = 0 ; i < participators.length ; i++){
         participator_key_hash.push(participators[i].participator_key_hash)
@@ -40,6 +39,7 @@ exports.details = async function (req,res) {
     _arguments.push(unlock_block_interval)
     _arguments.push(participant_num)
     _arguments.push([])
+    console.info(_arguments)
     const data = contract.deploy({
         data: ETH_CONTRACT_BYTECODE,
         arguments:_arguments
