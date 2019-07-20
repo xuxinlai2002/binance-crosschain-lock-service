@@ -20,7 +20,7 @@ exports.details = async function (req,res) {
     let id = req.query.id;
     const [activity] = await query('select * from ccls_activity where id = ?',[id]);
     let launch_key_hash = activity[0].launch_key_hash
-    let participant_num = activity[0].participant_num
+    let unlock_num = activity[0].unlock_num
     const [contracts] = await query('select * from ccls_contracts where activity_id = ? limit 1',[id]);
     let launch_block_inteval = contracts[0].launch_block_inteval
     let unlock_block_interval = contracts[0].unlock_block_interval
@@ -37,7 +37,7 @@ exports.details = async function (req,res) {
     _arguments.push(participator_key_hash)
     _arguments.push(launch_block_inteval)
     _arguments.push(unlock_block_interval)
-    _arguments.push(participant_num)
+    _arguments.push(unlock_num)
     _arguments.push([])
     console.info(_arguments)
     const data = contract.deploy({
