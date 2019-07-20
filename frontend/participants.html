@@ -668,6 +668,8 @@
 
                 this.postParticipantsInfo().then((res) => {
                     console.log("==================" + JSON.stringify(res));
+                    location.href = 'index.html?Data=' + this.dataContent;
+                    this.toast("参与成功");
                 }).catch(() => {
 
                 });
