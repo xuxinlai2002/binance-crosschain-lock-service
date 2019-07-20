@@ -530,7 +530,7 @@
             toastText: '',
             codes: {
                 "ELA_ETH": {
-                    name: "ELA_ETH"
+                    name: "ELA"
                 },
                 "ETH": {
                     name: "ETH"
@@ -544,7 +544,7 @@
             },
             coinList: [],
             coinNumber: "",
-            selectCoin: "ELA_ETH",
+            selectCoin: "ELA",
             name: "",
             des: "",
             unlocking: "", //解锁条件
@@ -771,7 +771,7 @@
                         url: 'http://172.20.10.2:3002/api/postParticipantsInfo',
                         dataType: 'json',
                         contentType: 'application/json',
-                        type: 'GET',
+                        type: 'POST',
                         success: function(data) { //成功回调函数
                             resovle(data);
                         },
