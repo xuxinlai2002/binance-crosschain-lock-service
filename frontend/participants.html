@@ -799,7 +799,14 @@
             }
         },
         mounted() {
+            // var data = this.GetQueryString("Data") || "";
+            // data = JSON.parse(decodeURIComponent(data));
+            // this.did = data["DID"];
+            // this.nickName = data["Nickname"];
+
             var data = this.GetQueryString("Data") || "";
+            this.dataContent = data;
+            console.log("=======" + decodeURIComponent(data));
             data = JSON.parse(decodeURIComponent(data));
             this.did = data["DID"];
             this.nickName = data["Nickname"];

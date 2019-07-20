@@ -443,7 +443,7 @@
                 //@author.href = turl;
                 //location.href = 'walletDetails.html?' + 'Address=' + address;
                 console.log("=============" + item.id);
-                location.href = 'participants.html?Data=' + this.dataContent + "&id=" + item.id;
+                location.href = 'participants.html?Data=' + this.dataContent + "&id=" + encodeURIComponent(JSON.stringify(item));
             },
             GetQueryString(name) {　　　
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
