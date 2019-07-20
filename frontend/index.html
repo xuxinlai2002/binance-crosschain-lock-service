@@ -347,15 +347,15 @@
                 <div class="row" v-if="item.status==4">锁币合约状态：<span>解锁</span></div>
                 <div class="row" v-if="item.status==5">锁币合约状态：<span>已解锁</span></div>
                 <div class="row" v-if="item.status==99">锁币合约状态：<span>待锁币</span></div>
-                <div class="row">发起人昵称：<span>{{item.creator_nickname}}</span></div>
-                <div class="row">发起人did：<span>{{item.creator_did}}</span></div>
+                <div class="row">发起人昵称：<span>{{item.creator_nickname)}}</span></div>
+                <div class="row">发起人did：<span>{{handleId(item.creator_did}}</span></div>
                 <div class="row">参与人数量：<span>{{item.participant_num}}</span></div>
                 <div class="row">金额列表：<span>{{handleToken(item.tokens)}}</span></div>
             </div>
         </div>
 
         <div class="addWallet" v-on:click="createWallet">
-            <p>+ 创建锁币合约</p>
+            <p style="color: #1cc88a">+ 创建锁币合约</p>
         </div>
     </div>
 </body>
@@ -384,6 +384,9 @@
             dataContent: ""
         },
         methods: {
+            handleId(id) {
+                return id.substring(0, 4) + "..." + substring(id.length - 4, id.length)
+            },
             handleToken(item) {
                 var url = "";
                 _.forEach(item, function(item1, index) {
@@ -409,13 +412,13 @@
                 }
             },
             createWallet() {
-                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/createContract.html";
-                var url = this.buildIdentity();
+                //this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/createContract.html";
+                //var url = this.buildIdentity();
                 //拼接大象钱包过度页面
-                var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                //var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 //跳转
-                location.href = turl;
-                // location.href = './createContract.html?Data=' + this.dataContent;
+                // location.href = turl;
+                location.href = './createContract.html?Data=' + this.dataContent;
             },
             buildIdentity() {
                 var url = "elaphant://identity?";
@@ -437,15 +440,15 @@
                 3	锁币中	//解锁
                 4	解锁   //无按钮
                 */
-                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/participants.html?id=" + encodeURIComponent(JSON.stringify(item));
-                var url = this.buildIdentity();
+                //this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/participants.html?id=" + encodeURIComponent(JSON.stringify(item));
+                //var url = this.buildIdentity();
                 //拼接大象钱包过度页面
-                var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                //var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 //跳转
-                location.href = turl;
+                //@author.href = turl;
                 //location.href = 'walletDetails.html?' + 'Address=' + address;
                 console.log("=============" + item.id);
-                //location.href = 'participants.html?Data=' + this.dataContent + "&id=" + item.id;
+                location.href = 'participants.html?Data=' + this.dataContent + "&id=" + item.id;
             },
             GetQueryString(name) {　　　
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -481,12 +484,15 @@
 
             });
             this.getLanugle();
-            // var data = this.GetQueryString("Data") || "";
-            // if (data === "") {
-
-            // } else {
-            //     this.dataContent = data;
-            // }
+            var data = this.GetQueryString("Data") || "";
+            if (data === "") {
+                this.schemeConfig["ReturnUrl"] = "http://172.20.10.2:1024/index.html";
+                var url = this.buildIdentity();
+                //拼接大象钱包过度页面
+                var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+            } else {
+                this.dataContent = data;
+            }
         }
     });
 </script>
