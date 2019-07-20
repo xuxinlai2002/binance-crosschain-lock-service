@@ -453,10 +453,6 @@
         <div class="walletname">
             <input v-model="name" placeholder="名称" readonly="readonly" />
         </div>
-        <span style="padding:8px 0px;">短描述</span>
-        <div class="walletname">
-            <input v-model="des" placeholder="短描述" readonly="readonly" />
-        </div>
         <span style="padding:8px 0px;">参与的币</span>
         <div class="walletname" style="padding:5px 0px;border-top:1px solid rgb(169, 169, 169)" v-if="coinList.length>0">
             <div style="margin-bottom: 5px;border-bottom:1px solid rgb(169, 169, 169);height:30px;line-height: 30px" v-for="(item,index) in coinList">
@@ -481,7 +477,7 @@
             <option :value ="item.chain_type" v-for="(item,key) in coinList">{{codes[item.chain_type].name}}</option>
           </select>
             <div style="width: 58%;float: left;margin: 0px 5px">
-                <input v-model="curNum" placeholder="数量" />
+                <input v-model="curNum" placeholder="Token 数量" />
             </div>
         </div>
         <div class="walletname">
