@@ -513,9 +513,9 @@
                 }
                 window.ethereum.sendTx(this.address, this.contractAddress, this.elaNumber, "just for test eth");
                 this.toast("充值成功");
-                setTimeout(() => {
-                    location.href = './index.html?Data=' + this.dataContent;
-                }, 3000);
+                // setTimeout(() => {
+                //     location.href = './index.html?Data=' + this.dataContent;
+                // }, 3000);
             },
             doCopy(publickey) {
                 var v = this;
