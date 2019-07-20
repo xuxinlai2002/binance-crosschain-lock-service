@@ -504,6 +504,10 @@
             <p>锁币按钮</p>
         </div>
 
+        <div class="four" v-on:click="createWallet" v-if="status ===99&&did!=creator_did">
+            <p>充值</p>
+        </div>
+
         <div class="four" v-on:click="createWallet" v-if="status ===3">
             <p>解锁</p>
         </div>
