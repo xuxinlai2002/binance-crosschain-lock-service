@@ -18,7 +18,8 @@ exports.details = async function (req,res) {
 
     const to = req.query.to
     //-------------- 1
-    const from = '0x068222eb69837a5e6f406967e7181b249741dd53'
+    const from = req.query.from
+    console.info(to,from)
     var keyobj=keyth.importFromFile(from ,'/Users/clark/Library/ELA_Ethereum');
     var privateKey=new Buffer(keyth.recover('elastos',keyobj),'hex');
     const nonce = await web3.eth.getTransactionCount(from);
@@ -31,6 +32,7 @@ exports.details = async function (req,res) {
     let gas = await web3.eth.estimateGas(tx1);
     let gasPrice = await web3.eth.getGasPrice();
     let rawTx = {
+        from:from,
         nonce:  nonce,
         gas:web3.utils.toHex(gas),
         gasLimit : web3.utils.toHex(gas),

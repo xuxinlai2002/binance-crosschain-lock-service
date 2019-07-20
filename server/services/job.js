@@ -1,7 +1,6 @@
 import timers from 'timers'
 import web3 from 'services/web3'
 import Tx from 'ethereumjs-tx'
-import locks from 'locks'
 import {
     PLATFORM_ETH_SIDECHAIN_PRIVKEY,
     PLATFORM_ETH_SIDECHAIN_ADDR,
@@ -29,7 +28,7 @@ process.on('message', function(msg) {
                     }
 
                     // 4 is status unlocked
-                    const [activity] = await query('select * from ccls_activity where status != 4');
+                    const [activity] = await query('select * from ccls_activity where status < 4');
                     for(var i=0;i<activity.length;i++){
                         const [contracts] = await query('select * from ccls_contracts where activity_id = ? limit 1',[activity[i].id]);
                         const contract_address = contracts[0].contract_address
@@ -67,7 +66,7 @@ process.on('message', function(msg) {
                     }
 
                     const [activityFinal] = await query('select * from ccls_activity where status = 4');
-                    console.info('1111',activityFinal)
+                    console.info('1111222',activityFinal)
                     for(var i=0;i<activityFinal.length;i++){
                         let final_id = activityFinal[i].id
                         // unlock eth
