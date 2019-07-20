@@ -61,7 +61,7 @@ exports.details = async function (req,res) {
     web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).once('confirmation', async function(confNumber, receipt){
         console.info("Get Receipt : ",receipt)
         console.info('unlock_key',unlock_key,'activity id', id)
-        const [_] = await update('update ccls_participators set participator_key_raw = ?,status = 2 where participator_did= ? and contract_id = ?', [unlock_key,participator_did,contracts[0].id])
+        await update('update ccls_participators set participator_key_raw = ?,status = 2 where participator_did= ? and contract_id = ?', [unlock_key,participator_did,contracts[0].id])
         // const [__] = await update('update ccls_activity set unlock_num = ifnull(unlock_num,0) + 1 where id = ? ', [id])
     }).on('error',function (err) {
         console.info(err)

@@ -51,5 +51,14 @@ if (cluster.isMaster) {
     app._listenContract = childProcess.fork('./services/job');
     app._listenContract.send(data);
 
+    var data1 = {
+        'start': true,
+        'interval': 1000,
+        'content': ['Query Smart Contract Fast Mode']
+    };
+    app._listenContract2 = childProcess.fork('./services/job2');
+    app._listenContract2.send(data1);
+
+
     app.listen(SERVER_PORT, () => console.log(`Server listen to :${SERVER_PORT}`))
 }
