@@ -252,7 +252,7 @@
         height: 100px;
         line-height: 100px;
         text-align: center;
-        background: #8E8787;
+        background: #1cc88a;
         box-shadow: 0px 2px 10px rgba(106, 147, 205, 0.1);
         border-radius: 10px;
         cursor: pointer;
@@ -347,15 +347,15 @@
                 <div class="row" v-if="item.status==4">锁币合约状态：<span>解锁</span></div>
                 <div class="row" v-if="item.status==5">锁币合约状态：<span>已解锁</span></div>
                 <div class="row" v-if="item.status==99">锁币合约状态：<span>待锁币</span></div>
-                <div class="row">发起人昵称：<span>{{item.creator_nickname)}}</span></div>
-                <div class="row">发起人did：<span>{{handleId(item.creator_did}}</span></div>
+                <div class="row">发起人昵称：<span>{{item.creator_nickname}}</span></div>
+                <div class="row">发起人did：<span>{{handleId(item.creator_did)}}</span></div>
                 <div class="row">参与人数量：<span>{{item.participant_num}}</span></div>
                 <div class="row">金额列表：<span>{{handleToken(item.tokens)}}</span></div>
             </div>
         </div>
 
         <div class="addWallet" v-on:click="createWallet">
-            <p style="color: #1cc88a">+ 创建锁币合约</p>
+            <p style="color: #ffffff">+ 创建锁币合约</p>
         </div>
     </div>
 </body>
@@ -364,10 +364,8 @@
         el: '#app',
         data: {
             loading: true,
-            zh: {
-            },
-            en: {
-            },
+            zh: {},
+            en: {},
             curLangule: {},
             curLanguleKey: 'zh',
             walletList: [],
@@ -476,8 +474,7 @@
                     this.walletList = res.result || [];
                 }
                 console.log("==========" + JSON.stringify(res));
-            }).catch(() => {
-            });
+            }).catch(() => {});
             this.getLanugle();
             var data = this.GetQueryString("Data") || "";
             if (data === "") {
