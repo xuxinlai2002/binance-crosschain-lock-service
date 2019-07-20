@@ -56,8 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
-
-./client/build
-../.DS_Store
 .DS_Store
-../node_modules/
+../.DS_Store
+./client/build
+../node_modules/*
