@@ -2,13 +2,25 @@ import get from 'modules/api/controllers/test_get'
 import post from 'modules/api/controllers/test_post'
 
 // import post from 'modules/api/controllers/create_contract'
+
+import lockWalletList from 'modules/api/controllers/get_lock_wallet_list'
+import lockWalletDetail from 'modules/api/controllers/get_lock_wallet_Detail'
+import creatorInfo from 'modules/api/controllers/post_creator_info'
+import participantsInfo from 'modules/api/controllers/post_participants_info'
+
 export default app => {
     app.get('/get',get.details);
     app.post('/post',post.details);
+
+    app.get('/getLockWalletList',lockWalletList.showList);
+    app.get('/getLockWalletDetail',lockWalletDetail.showDetail);
+    app.post('/postCreatorInfo',creatorInfo.postCreator);
+    app.post('/postParticipantsInfo',participantsInfo.postParticipant);
+
     app.get('/test', function(req, res) {
         res.send(`<!DOCTYPE html>
 <html lang="en">
-<head>
+<head>e
     <meta charset="UTF-8">
     <title>Title</title>
 </head>

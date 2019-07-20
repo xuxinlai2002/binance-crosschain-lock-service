@@ -1,0 +1,139 @@
+1）IF001
+http://localhost:3002/api/getLockWalletList
+
+{
+	"status": 0,
+	"result": [{
+		"id": 1,
+		"name": "test1",
+		"creator_did": "111",
+		"participant_num": 5,
+		"status": 0,
+		"tokens": [{
+			"chain_type": "ELA-ETH",
+			"token_num": 100
+		}, {
+			"chain_type": "ETH",
+			"token_num": 200
+		}]
+	}, {
+		"id": 2,
+		"name": "test2",
+		"creator_did": "222",
+		"participant_num": 10,
+		"status": 0,
+		"tokens": [{
+			"chain_type": "ELA-ETH",
+			"token_num": 500
+		}]
+	}]
+}
+
+2）IF002
+http://localhost:3002/api/postCreatorInfo
+{
+  "name": "亦来云活动",
+  "status":0,
+  "launch_key_hash":"abcxxxxx",
+  "creator_did":"yyyyy",
+  "creator_nickname":"myName",
+  "participant_num":20,
+  "unlock_num":10,
+  "tokens":[{
+	  "chain_type": "ELA_ETH",
+	  "token_num":101,
+	  "launch_block_inteval":200,
+	  "unlock_block_interval":1000
+  },{
+	  "chain_type": "ETH",
+	  "token_num":102,
+	  "launch_block_inteval":200,
+	  "unlock_block_interval":1000
+  }]
+}
+
+
+3)IF003
+http://localhost:3002/api/getLockWalletDetail?activity=1
+{
+	"status": 0,
+	"result": [{
+		"id": 1,
+		"name": "test1",
+		"creator_did": "111",
+		"creator_nickname": "张三",
+		"participant_num": 5,
+		"unlock_num": null,
+		"status": 0,
+		"launch_key_hash": null,
+		"launch_key_raw": null,
+		"tokens": [{
+			"id": 1,
+			"activity_id": 1,
+			"chain_type": "ELA-ETH",
+			"allowed_tokens": "ELA-ETH",
+			"token_num": 100,
+			"contract_address": null,
+			"txid": null,
+			"launch_block_inteval": null,
+			"unlock_block_interval": null,
+			"base_height": null,
+			"local_system_time": "2019-07-19T06:52:24.000Z",
+			"paticipators": [{
+				"id": 1,
+				"paticipator_did": "d1",
+				"paticipator_nickname": "my",
+				"contract_id": 1,
+				"token_type": "ELA_ETH",
+				"participator_address": "address1",
+				"participator_key_hash": "key_hash1",
+				"participator_key_raw": "key_hash1",
+				"contract_address": "contract_address1",
+				"participator_token_number": "contract_token1",
+				"status": 0,
+				"recharge_txid": "txid_1",
+				"local_system_time": "2019-07-19T13:31:51.000Z"
+			}]
+		}, {
+			"id": 2,
+			"activity_id": 1,
+			"chain_type": "ETH",
+			"allowed_tokens": "ETH",
+			"token_num": 200,
+			"contract_address": null,
+			"txid": null,
+			"launch_block_inteval": null,
+			"unlock_block_interval": null,
+			"base_height": null,
+			"local_system_time": "2019-07-19T07:17:08.000Z",
+			"paticipators": [{
+				"id": 2,
+				"paticipator_did": "d2",
+				"paticipator_nickname": "my",
+				"contract_id": 2,
+				"token_type": "ETH",
+				"participator_address": "address2",
+				"participator_key_hash": "key_hash1",
+				"participator_key_raw": "key_hash2",
+				"contract_address": "contract_address2",
+				"participator_token_number": "contract_token2",
+				"status": 0,
+				"recharge_txid": "txid_2",
+				"local_system_time": "2019-07-19T13:34:21.000Z"
+			}]
+		}]
+	}]
+}
+
+4)IF004
+
+http://localhost:3002/api/postParticipantsInfo
+{
+  "activity_id": "1",
+  "participator_did":"111",
+  "participator_nickname":"myxx",
+  "token_type":"ETH",
+  "token_num":10,
+  "participator_key_hash":"hash123456"
+}
+
