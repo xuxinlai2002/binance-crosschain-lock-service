@@ -722,10 +722,15 @@
 
             },
             suobi() {
-                if (this.startPassword === "") {
-                    this.toast("请输入密码");
+                if (this.did != this.creator_did) {
+                    this.charge();
                     return;
                 }
+                if (this.startPassword === "" && this.did === this.creator_did) {
+                    this.toast("请输入启动密码");
+                    return;
+                }
+
                 this.suobiHttp().then((res) => {
                     if (res.status === 0) {
                         location.href = 'index.html?Data=' + this.dataContent;
