@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Refresh" content="3" />
     <title>锁币合约列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
@@ -482,7 +483,7 @@
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
                 location.href = turl;
             } else {
-                if(data != ""){
+                if (data != "") {
                     localStorage.setItem('Lock-Wallet', data);
                 }
                 this.dataContent = dataContent;
@@ -497,7 +498,6 @@
             // } else {
             //     this.dataContent = data;
             // }
-
             this.getLockWalletList().then(res => {
                 if (res.status === 0) {
                     this.walletList = res.result || [];
