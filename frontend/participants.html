@@ -938,6 +938,10 @@
                     //this.creator_did = data["creator_did"];
                     this.coinList = data["tokens"] || [];
                     this.curCoin = data["tokens"][0]["chain_type"];
+                    var paticipators = data["tokens"][0]["paticipators"] || [];
+                    if (paticipators.length > 0) {
+                        this.contractAddress = paticipators[0]["contract_address"];
+                    }
                     this.contractAddress = data["tokens"][0]["paticipators"][0]["contract_address"];
                     this.unlockingHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
                     this.startHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
