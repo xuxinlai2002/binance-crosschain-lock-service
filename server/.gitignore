@@ -58,3 +58,6 @@ typings/
 .env
 
 ./client/build
+../.DS_Store
+.DS_Store
+../node_modules/
