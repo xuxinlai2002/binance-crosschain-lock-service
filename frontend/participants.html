@@ -756,14 +756,18 @@
                     });
                 });
             },
-            shanglian() {
+            async shanglian() {
                 this.createHeYue().then((res) => {
                     if (res.status === 0) {
-                        location.href = 'index.html?Data=' + this.dataContent;
                         this.toast("上链成功");
+                        await this.sleep(20000);
+                        location.href = 'index.html?Data=' + this.dataContent;
                     }
                 });
 
+            },
+            sleep(d) {
+                return new Promise((resolve) => setTimeout(resolve, d))
             },
             canyu() {
                 if (this.startPassword === "") {
