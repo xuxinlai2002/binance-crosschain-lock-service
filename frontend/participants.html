@@ -480,8 +480,12 @@
                 <input v-model="curNum" placeholder="Token 数量" />
             </div>
         </div>
-        <div class="walletname">
+        <div class="walletname" v-if="status ===0 || status===3">
             <input v-model="startPassword" placeholder="解锁密码" type="password" />
+        </div>
+
+        <div class="walletname" v-if="status ===99&&did===creator_did">
+            <input v-model="startPassword" placeholder="启动密码" type="password" />
         </div>
 
         <div class="four" v-on:click="createWallet" v-if="status ===0">
@@ -724,7 +728,7 @@
             createHeYue() {
                 return new Promise((resovle, reject) => {
                     $.ajax({
-                        url: 'http://172.20.10.2:3002/api/getLockWalletDetail?/v1/contract/create?id=' + this.activity,
+                        url: 'http://172.20.10.2:3002/api/v1/contract/create?id=' + this.activity,
                         dataType: 'json',
                         contentType: 'application/json',
                         type: 'GET',
