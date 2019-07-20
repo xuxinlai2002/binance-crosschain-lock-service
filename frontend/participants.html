@@ -756,8 +756,8 @@
                     });
                 });
             },
-            async shanglian() {
-                this.createHeYue().then((res) => {
+            shanglian() {
+                this.createHeYue().then(async(res) => {
                     if (res.status === 0) {
                         this.toast("上链成功");
                         await this.sleep(20000);
