@@ -485,7 +485,7 @@
             </div>
         </div>
         <div class="walletname">
-            <input v-model="startPassword" placeholder="解锁密码" />
+            <input v-model="startPassword" placeholder="解锁密码" type="password" />
         </div>
 
         <div class="four" v-on:click="createWallet" v-if="status ===0">
@@ -772,6 +772,7 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         type: 'POST',
+                        data: JSON.stringify(parms),
                         success: function(data) { //成功回调函数
                             resovle(data);
                         },
