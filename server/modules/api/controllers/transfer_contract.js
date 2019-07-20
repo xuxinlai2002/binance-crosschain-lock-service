@@ -19,15 +19,17 @@ exports.details = async function (req,res) {
     const to = req.query.to
     //-------------- 1
     const from = req.query.from
+    const amt = req.query.amt
     console.info(to,from)
+
     var keyobj=keyth.importFromFile(from ,'/Users/clark/Library/ELA_Ethereum');
     var privateKey=new Buffer(keyth.recover('elastos',keyobj),'hex');
     const nonce = await web3.eth.getTransactionCount(from);
-    console.info(web3.utils.toWei('1','ether'))
+    console.info(web3.utils.toWei(amt,'ether'))
     let tx1 = {
         from: from,
         to: to,
-        value:web3.utils.toHex(web3.utils.toWei('1','ether'))
+        value:web3.utils.toHex(web3.utils.toWei(amt,'ether'))
     };
     let gas = await web3.eth.estimateGas(tx1);
     let gasPrice = await web3.eth.getGasPrice();
@@ -38,7 +40,7 @@ exports.details = async function (req,res) {
         gasLimit : web3.utils.toHex(gas),
         gasPrice: web3.utils.toHex(gasPrice),
         to: to,
-        value:web3.utils.toHex(web3.utils.toWei('1','ether'))
+        value:web3.utils.toHex(web3.utils.toWei(amt,'ether'))
     };
     const tx = new Tx(rawTx);
     tx.sign(privateKey);
