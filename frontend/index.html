@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Refresh" content="3" />
+    <!-- <meta http-equiv="Refresh" content="3" /> -->
     <title>锁币合约列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.min.js"></script>
@@ -378,7 +378,8 @@
                 "ReturnUrl": "",
                 "RequestInfo": "Nickname"
             },
-            dataContent: ""
+            dataContent: "",
+            timer: ""
         },
         methods: {
             handleId(id) {
@@ -505,6 +506,16 @@
                 console.log("==========" + JSON.stringify(res));
             }).catch(() => {});
 
+            this.timer = setInterval(() => {
+                this.getLockWalletList().then(res => {
+                    if (res.status === 0) {
+                        this.walletList = res.result || [];
+                    }
+                }).catch(() => {});
+            }, 1000);
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
         }
     });
 </script>
