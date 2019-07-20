@@ -17,6 +17,15 @@ process.on('message', function(msg) {
     this._startTimer = function() {
         timers.setInterval(async function() {
             try {
+                // activity 0 to 1 check
+                const [activity0] = await query('select * from ccls_activity where status == 0');
+                for(var i=0;i<activity0.length;i++){
+                    const [participators_num] = await query('select * from ccls_participators where contract_id = (select id from ccls_contracts where activity_id = ? limit 1)',[activity0[i].id]);
+                    if(participators_num.length >= activity0[i].participant_num){
+                        await update('update ccls_activity set status = ? where id= ?', [1,activity0[i].id])
+                    }
+                }
+
                 // 4 is status unlocked
                 const [activity] = await query('select * from ccls_activity where status != 4');
                 for(var i=0;i<activity.length;i++){

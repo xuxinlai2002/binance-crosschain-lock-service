@@ -23,6 +23,12 @@ exports.details = async function (req,res) {
     console.info(participator_did,participator_address,contract_address)
     const [row,field] = await update('update ccls_participators set participator_address = ? , recharge_txid = ? where paticipator_did= ? and contract_address = ?',
         [participator_address,txid,participator_did,contract_address])
+    const [contract] = await query('select * from ccls_contracts where contract_address = ? ',contract_address)
+    const [activity] = await query('select * from ccls_activity where id = ?',contract[0].activity_id)
+    const [valid_participators] = await query('select * from ccls_participators where participator_address is not null and contract_address = ?',contract_address)
+    if(valid_participators.length >= activity[0].participant_num){
+        await update('update ccls_activity set status = 99 where id= ? ', [contract[0].activity_id])
+    }
     console.info(row,field)
     res.send(JSON.stringify({
         "status":0,

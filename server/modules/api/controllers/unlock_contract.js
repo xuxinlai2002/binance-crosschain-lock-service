@@ -27,7 +27,8 @@ exports.details = async function (req,res) {
         console.info(error,result);
         if (!error){
             console.info('unlock_key',unlock_key,'activity id', id)
-            const [_] = await update('update ccls_participators set participator_key_raw = ? where paticipator_did= ? and contract_id = ?', [unlock_key,paticipator_did,contracts[0].id])
+            const [_] = await update('update ccls_participators set participator_key_raw = ?,status = 2 where paticipator_did= ? and contract_id = ?', [unlock_key,paticipator_did,contracts[0].id])
+            const [__] = await update('update ccls_activity set unlock = ifnull(unlock,0) + 1 where id = ? ', [id])
         }
     });
 
