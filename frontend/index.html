@@ -469,12 +469,7 @@
             }
         },
         mounted() {
-            this.getLockWalletList().then(res => {
-                if (res.status === 0) {
-                    this.walletList = res.result || [];
-                }
-                console.log("==========" + JSON.stringify(res));
-            }).catch(() => {});
+
             this.getLanugle();
             var data = this.GetQueryString("Data") || "";
             if (data === "") {
@@ -482,10 +477,19 @@
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                alert("turl====" + turl);
                 location.href = turl;
             } else {
                 this.dataContent = data;
             }
+
+            this.getLockWalletList().then(res => {
+                if (res.status === 0) {
+                    this.walletList = res.result || [];
+                }
+                console.log("==========" + JSON.stringify(res));
+            }).catch(() => {});
+
         }
     });
 </script>
