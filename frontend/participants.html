@@ -623,7 +623,7 @@
                 }
                 this.suobiHttp().then((res) => {
                     if (res.status === 0) {
-                        location.href = 'index.html';
+                        location.href = 'index.html?Data=' + this.dataContent;
                         this.toast("锁币成功");
                     }
                 }).catch(() => {
@@ -649,7 +649,7 @@
             shanglian() {
                 this.createHeYue().then((res) => {
                     if (res.status === 0) {
-                        location.href = 'index.html';
+                        location.href = 'index.html?Data=' + this.dataContent;
                         this.toast("上链成功");
                     }
                 });

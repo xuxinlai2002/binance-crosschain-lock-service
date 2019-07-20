@@ -348,7 +348,7 @@
                 <div class="row" v-if="item.status==5">锁币合约状态：<span>已解锁</span></div>
                 <div class="row" v-if="item.status==99">锁币合约状态：<span>待锁币</span></div>
                 <div class="row">发起人昵称：<span>{{item.creator_nickname}}</span></div>
-                <div class="row">发起人did：<span>{{handleId(item.creator_did)}}</span></div>
+                <!-- <div class="row">发起人did：<span>{{handleId(item.creator_did)}}</span></div> -->
                 <div class="row">参与人数量：<span>{{item.participant_num}}</span></div>
                 <div class="row">金额列表：<span>{{handleToken(item.tokens)}}</span></div>
             </div>
@@ -478,10 +478,12 @@
             this.getLanugle();
             var data = this.GetQueryString("Data") || "";
             if (data === "") {
+                console.log("ssssssssssssssssssssssssssss");
                 this.schemeConfig["ReturnUrl"] = "http://172.20.10.2:1024/index.html";
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
+                location.href = turl;
             } else {
                 this.dataContent = data;
             }
