@@ -480,6 +480,7 @@
             address: '',
             elaNumber: '',
             contractAddress: '',
+            dataContent: ''
         },
         methods: {
             GetQueryString(name) {　　　
@@ -511,6 +512,8 @@
                     return false;
                 }
                 window.ethereum.sendTx(this.address, this.contractAddress, this.elaNumber, "just for test eth");
+                this.toast("充值成功");
+                location.href = './index.html?Data=' + this.dataContent;
             },
             doCopy(publickey) {
                 var v = this;
@@ -530,7 +533,7 @@
         mounted() {
             this.address = this.GetQueryString("address") || "";
             this.contractAddress = this.GetQueryString("contractAddress") || "";
-
+            this.dataContent = this.GetQueryString("Data") || "";
             //this.elaNumber = this.GetQueryString("elaNum") || "";
             this.getLanugle();
         }

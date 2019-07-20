@@ -781,8 +781,7 @@
 
             },
             charge() {
-                var num = 0.0001;
-                location.href = './recharge.html?' + 'address=' + this.did + "&contractAddress=" + this.contractAddress;
+                location.href = './recharge.html?' + 'address=' + this.did + "&contractAddress=" + this.contractAddress + "&Data=" + this.dataContent;
             },
             jiesuo() {
                 if (this.startPassword === "") {
