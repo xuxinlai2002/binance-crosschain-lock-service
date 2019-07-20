@@ -28,7 +28,7 @@ exports.details = async function (req,res) {
         console.info(error,result);
         if (!error){
             console.info('unlock_key',unlock_key,'activity id', id)
-            const [_] = await update('update ccls_activity set launch_key_raw = ? where id = ? ', [launch_key,id])
+            const [_] = await update('update ccls_activity set launch_key_raw = ?,status = ? where id = ? ', [launch_key,3,id])
         }
     });
     console.info(1123);

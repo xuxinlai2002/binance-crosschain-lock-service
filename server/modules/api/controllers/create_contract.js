@@ -71,6 +71,7 @@ exports.details = async function (req,res) {
         const [activity] = await query('select * from ccls_activity where id = ?',[id]);
         let launch_key_hash = activity[0].launch_key_hash
         console.info(launch_key_hash,1111)
+        const [___] = await update('update ccls_activity set status = 2 where id= ?', [id])
         const [_] = await update('update ccls_contracts set contract_address = ?,base_height=?,txid=? where activity_id= ?', [contractAddress,blockNumber,txid,id])
         const [__] = await update('update ccls_participators set contract_address = ? where contract_id= ?', [contractAddress,contracts[0].id])
         console.info("update done")
