@@ -513,6 +513,9 @@
                 }
                 window.ethereum.sendTx(this.address, this.contractAddress, this.elaNumber, "just for test eth");
                 this.toast("充值成功");
+                await this.sleep(3000);
+                alert("==============");
+                location.href = './index.html?Data=' + this.dataContent;
                 // setTimeout(() => {
                 //     location.href = './index.html?Data=' + this.dataContent;
                 // }, 3000);
@@ -530,7 +533,10 @@
                 setTimeout(function() {
                     v.toastShow = false
                 }, 1500)
-            }
+            },
+            sleep(d) {
+                return new Promise((resolve) => setTimeout(resolve, d))
+            },
         },
         mounted() {
             this.address = this.GetQueryString("address") || "";
