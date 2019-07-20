@@ -583,7 +583,7 @@
                     this.postAuthorInfo().then(res => {
                         console.log("=========" + JSON.stringify(res));
                         if (res.status === 0) {
-                            location.href = 'index.html';
+                            location.href = 'index.html?Data=' + this.dataContent;
                         }
                     }).catch(() => {
 
