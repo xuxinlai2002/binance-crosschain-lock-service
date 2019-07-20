@@ -942,7 +942,7 @@
                     if (paticipators.length > 0) {
                         this.contractAddress = paticipators[0]["contract_address"];
                     }
-                    this.contractAddress = data["tokens"][0]["paticipators"][0]["contract_address"];
+                    //this.contractAddress = data["tokens"][0]["paticipators"][0]["contract_address"];
                     this.unlockingHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
                     this.startHeightInterval = data["tokens"][0]["launch_block_inteval"] || "";
                     this.unlocking = data["unlock_num"] || "";
