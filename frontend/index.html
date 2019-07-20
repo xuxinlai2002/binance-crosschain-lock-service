@@ -409,7 +409,7 @@
                 }
             },
             createWallet() {
-                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/createContract.html";
+                this.schemeConfig["ReturnUrl"] = "http://172.20.10.2:1024/createContract.html";
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
@@ -437,7 +437,7 @@
                 3	锁币中	//解锁
                 4	解锁   //无按钮
                 */
-                this.schemeConfig["ReturnUrl"] = "http://0.0.0.0:1024/participants.html?id=" + encodeURIComponent(JSON.stringify(item));
+                this.schemeConfig["ReturnUrl"] = "http://172.20.10.2:1024/participants.html?id=" + encodeURIComponent(JSON.stringify(item));
                 var url = this.buildIdentity();
                 //拼接大象钱包过度页面
                 var turl = 'https://elephantwallet.app/redirect?appName=Lock Wallet&appTitle=Lock Wallet&autoRedirect=True&redirectURL=' + encodeURIComponent(url);
