@@ -10,10 +10,14 @@ const dba = mysql.createPool({
         queueLimit: 0
     })
 
-export async function query(sql) {
-    return await dba.query(sql)
+export async function query(sql,param) {
+    return await dba.query(sql,param)
 }
 
-export async function insert(sql) {
-    return await dba.execute(sql)
+export async function insert(sql,param) {
+    return await dba.execute(sql,param)
+}
+
+export async function update(sql,param) {
+    return await dba.query(sql,param)
 }

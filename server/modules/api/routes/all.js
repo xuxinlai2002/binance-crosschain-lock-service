@@ -1,61 +1,29 @@
 import get from 'modules/api/controllers/test_get'
 import post from 'modules/api/controllers/test_post'
+import create_contract from 'modules/api/controllers/create_contract'
+import unlock_contract from 'modules/api/controllers/unlock_contract'
+import transfer_contract from 'modules/api/controllers/transfer_contract'
+import launch_contract from 'modules/api/controllers/launch_contract'
+import recharge_callback from 'modules/api/controllers/recharge_callback'
 
-// import post from 'modules/api/controllers/create_contract'
 export default app => {
+    // demo
     app.get('/get',get.details);
     app.post('/post',post.details);
-    app.get('/test', function(req, res) {
-        res.send(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    1212121
-    <button id='test'>111</button>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(()=>{
-    window.addEventListener('load', function() {
-          // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-          if (typeof web3 !== 'undefined') {
-            // Use Mist/MetaMask's provider
-            web3 = new Web3(web3.currentProvider);
-          } else {
-            console.log('No web3? You should consider trying MetaMask!')
-            // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-          }
-        });
-})
-
-    
-</script>
-    
-<script>
-$(()=>{
-  if (typeof web3 !== 'undefined') {
-    // $('#test').click(()=>{
-      web3.eth.sendTransaction({
-        to: '0x192c96bfee59158441f26101b2db1af3b07feb40',
-        value: web3.toWei(1, 'ether')
-      }, (err, data) => {
-        if  (err) {
-        } else {
-        }
-      })
-    // }) 
-  }
-})
-</script>
-<script>
-</script>
-</html>`)
-    })
     app.get('/', function (req, res) {
         res.render('index', { title: 'Hey', message: 'Hello there!' })
     });
+
+    // for real
+    // create contract
+    app.get("/v1/contract/create",create_contract.details);
+    // launch contract
+    app.get("/v1/contract/launch",launch_contract.details);
+    // join contract
+    // app.get("/v1/contract/transfer",transfer_contract.details);
+    // unlock contract
+    app.get("/v1/contract/unlock",unlock_contract.details);
+    // p
+    app.post("/v1/contract/recharge/callBack",recharge_callback.details);
+
 }
