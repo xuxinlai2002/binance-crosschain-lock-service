@@ -470,7 +470,7 @@
             <option :value ="key" v-for="(item,key) in codes">{{item.name}}</option>
           </select>
             <div style="width: 36%;float: left;margin: 0px 5px">
-                <input v-model="coinNumber" placeholder="token数量" />
+                <input v-model="coinNumber" placeholder="Token 数量" />
             </div>
 
             <div style="width: 20%;float: left;">
@@ -490,7 +490,7 @@
             <input v-model="startHeightInterval" placeholder="启动高度间隔" />
         </div>
         <div class="walletname">
-            <input v-model="startPassword" placeholder="启动密码" />
+            <input v-model="startPassword" placeholder="启动密码" type="password" />
         </div>
 
         <div class="four" v-on:click="createWallet">
@@ -583,7 +583,7 @@
                     this.postAuthorInfo().then(res => {
                         console.log("=========" + JSON.stringify(res));
                         if (res.status === 0) {
-                            location.href = 'index.html';
+                            location.href = 'index.html?Data=' + this.dataContent;
                         }
                     }).catch(() => {
 
