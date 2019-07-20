@@ -26,7 +26,7 @@ process.on('message', function(msg) {
                         // unlock eth
                         const [contracts] = await query('select * from ccls_contracts where activity_id = ? limit 1',[final_id]);
                         const contract_address = contracts[0].contract_address
-                        const [rows] = await query('select * from ccls_participators where contract_id = ? and status = 2',contracts[0].id);
+                        const [rows] = await query('select * from ccls_participators where contract_id = ? and status = 1',contracts[0].id);
                         let participators = []
                         for(var m = 0;m<rows.length;m++){
                             participators.push(rows[m].participator_address)
