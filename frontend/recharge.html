@@ -478,7 +478,8 @@
             toastShow: false,
             toastText: '',
             address: '',
-            elaNumber: ''
+            elaNumber: '',
+            contractAddress: '',
         },
         methods: {
             GetQueryString(name) {　　　
@@ -509,7 +510,7 @@
                     this.toast("请输入金额")
                     return false;
                 }
-                window.ethereum.sendTx(this.address, this.elaNumber, "just for test eth");
+                window.ethereum.sendTx(this.address, this.contractAddress, this.elaNumber, "just for test eth");
             },
             doCopy(publickey) {
                 var v = this;
@@ -528,6 +529,8 @@
         },
         mounted() {
             this.address = this.GetQueryString("address") || "";
+            this.contractAddress = this.GetQueryString("contractAddress") || "";
+
             //this.elaNumber = this.GetQueryString("elaNum") || "";
             this.getLanugle();
         }
